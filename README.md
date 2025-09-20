@@ -111,7 +111,7 @@ For the viewer to trust you, you must add your public key to its trusted list.
 This tool is built on a "zero-trust" foundation where verification is paramount. The signature check proves the file's integrity, while the trusted list check proves the author's authenticity. A file can be integral (un-tampered) but inauthentic (from an unknown person), and the viewer is smart enough to tell you the difference.
 
 ---
-## ⚠️ A Note on Security
+## ⚠️ Disclaimer
 The SMC toolkit is built using the industry-standard PyNaCl library, which provides a high-level interface to the robust and heavily audited libsodium cryptographic library. All cryptographic operations—from the Ed25519 digital signatures to the scrypt KDF and XChaCha20-Poly1305 encryption—are handled by these trusted, professional-grade components.
 
 This application is provided "AS IS" under the MIT License, without warranty of any kind. As with any security tool, you are encouraged to understand its functionality and evaluate its suitability for your specific use case. The security of your data depends on both the strength of the underlying cryptography and the secure management of your own secret keys. (Writing it on a sticky note stuck to your monitor is not considered 'secure management'.)
