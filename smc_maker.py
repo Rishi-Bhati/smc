@@ -79,9 +79,12 @@ def create_smc(input_path:str, output_path:str, sign_key_path:str, encryption_pa
         sk_bytes = read_b64_file(sign_key_path)
         sk = SigningKey(sk_bytes)
         pk = sk.verify_key
+
+        main_payload_len = len(main_payload) # Length of the main payload for the header
         
         header = {
-            "version": 5,
+            "version": 5.1, # Let's update the version number
+            "payload_len": main_payload_len, # <-- ADD THIS LINE
             "author_pk": base64.b64encode(pk.encode()).decode('utf-8'),
             "original_filename": os.path.basename(input_path),
             "is_payload_encrypted": is_payload_encrypted,
@@ -150,17 +153,19 @@ def setup_create_tab(parent_frame):
     
     # --- File Paths (same as before, but using new variables) ---
     # A function to create the file browser rows to avoid repeating code
-    def create_file_row(parent, label_text, var):
+    # In setup_create_tab, modify this function:
+    def create_file_row(parent, label_text, var, cmd): # <-- Add cmd here
         frame = ttk.Frame(parent)
         frame.pack(fill='x', padx=5, pady=5)
         ttk.Label(frame, text=label_text, width=12).pack(side='left', padx=5)
         ttk.Entry(frame, textvariable=var).pack(side='left', expand=True, fill='x')
-        # We will add the "Browse" button commands in the next step
-        ttk.Button(frame, text="Browse...").pack(side='left', padx=5)
+        # Use the new cmd variable to connect the button
+        ttk.Button(frame, text="Browse...", command=cmd).pack(side='left', padx=5) # <-- Add command=cmd here
 
-    create_file_row(parent_frame, "Input File:", img_path_var)
-    create_file_row(parent_frame, "Signing Key:", sign_key_path_var)
-    create_file_row(parent_frame, "Output File:", out_path_var)
+    # In setup_create_tab, modify these three lines:
+    create_file_row(parent_frame, "Input File:", img_path_var, browse_input_file)
+    create_file_row(parent_frame, "Signing Key:", sign_key_path_var, browse_signing_key)
+    create_file_row(parent_frame, "Output File:", out_path_var, browse_output_file)
 
     # --- Full File Encryption Section ---
 
