@@ -39,7 +39,7 @@ Getting started is easy. Don't be intimidated by the cryptography; it's already 
 
 1.  **Clone the repo (or just save the files):**
     ```bash
-    git clone [https://github.com/Rishi-Bhati/smc.git](https://github.com/Rishi-Bhati/smc.git)
+    git clone https://github.com/Rishi-Bhati/smc.git
     cd smc-project
     ```
 
