@@ -6,7 +6,6 @@ import os
 import json
 import zlib
 import struct
-import os # Needed to get filenames and generate random salts
 from nacl.secret import SecretBox # The tool for fast encryption/decryption
 from nacl.pwhash import scrypt # The KDF for turning passwords into keys
 
@@ -299,7 +298,6 @@ notebook.pack(pady=10, padx=10, fill="both", expand=True)
 genkey_frame = ttk.Frame(notebook)
 create_frame = ttk.Frame(notebook)
 
-notebook.add(create_frame, text="Create SMC")
 # --- NEW LINE ---
 setup_create_tab(create_frame)
 
@@ -307,6 +305,7 @@ setup_create_tab(create_frame)
 #add frames to notebook as tabs
 notebook.add(genkey_frame, text="Generate Keys")
 notebook.add(create_frame, text="Create SMC")
+
 
 # Create a label and add it to the 'genkey_frame'
 label = ttk.Label(genkey_frame, text="Enter prefix for key filenames:")
